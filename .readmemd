@@ -1,0 +1,19 @@
+# Purchase Data Report System
+
+This project fetches data about users, products, and purchase history from a mock API, stores it in a SQLite database, and generates reports on demand.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- SQLite or a preferred database
+
+### Installation
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install dependencies:
+
+   ```bash
+   npm install

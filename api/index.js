@@ -1,17 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const fetchDataRoutes = require('./fetchData');
-const reportRoutes = require('./reports');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
+const reportRoutes = require('./reports');
 
-app.use(bodyParser.json());
-
-// Use API routes
-app.use('/api/fetch', fetchDataRoutes);
+app.use(express.json());
 app.use('/api/reports', reportRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Export the app for testing
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
