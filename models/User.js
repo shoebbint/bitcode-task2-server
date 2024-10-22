@@ -1,23 +1,30 @@
 // models/User.js
-const { Model, DataTypes } = require('sequelize');
-const { sequelize } = require('../config/db'); // Ensure this path is correct
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
-class User extends Model {}
-
-User.init({
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    // Add any additional fields needed
+const User = sequelize.define('User', {
+  id: {
+    type: DataTypes.INTEGER,                           
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  phone: {
+    type: DataTypes.STRING(30), // Adjusting the length to match the schema
+    allowNull: false,
+    unique: true, // Ensuring the phone number is unique
+  },
+  created_at: {
+    type: DataTypes.DATE,
+    allowNull: true, // Allowing null as per your schema
+    defaultValue: DataTypes.NOW, // Default to current timestamp
+  },
 }, {
-    sequelize,
-    modelName: 'User',
+  tableName: 'Users',
+  timestamps: false, // Setting to false as you are managing timestamps manually
 });
 
 module.exports = User;
