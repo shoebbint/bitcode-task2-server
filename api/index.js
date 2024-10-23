@@ -8,7 +8,7 @@ const { sequelize } = require('../config/db');
 
 // Configure CORS to allow requests from your frontend
 const corsOptions = {
-    origin: 'https://bitcode-frontend-task.vercel.app', // Replace with your frontend URL
+    origin: 'http://localhost:5173', // Replace with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods if necessary
     credentials: true // Allow credentials if you're using cookies or HTTP Auth
 };
