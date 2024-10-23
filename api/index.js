@@ -6,18 +6,26 @@ const reportRoutes = require('./reports');
 const dataRoutes = require('./fetchData'); 
 const { sequelize } = require('../config/db');
 
-// Configure CORS to allow requests from your frontend
+// CORS options
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods if necessary
-    credentials: true // Allow credentials if you're using cookies or HTTP Auth
+    origin: process.env.NODE_ENV === 'production' ? 'https://bitcode-frontend-task.vercel.app/' : 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
 };
 
-app.use(cors(corsOptions)); // Use the configured CORS options
-app.use(express.json());
-app.use('/api/reports', reportRoutes);
-app.use('/api', dataRoutes); 
 
+app.use(cors(corsOptions)); // Enable CORS
+app.use(express.json()); // Parse JSON requests
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+// Route handlers
+app.use('/api/reports', reportRoutes); // Reports routes
+app.use('/api', dataRoutes); // Data routes
+
+// Sync the database and start the server
 sequelize.sync() 
     .then(() => {
         console.log('Database synced');
@@ -29,4 +37,4 @@ sequelize.sync()
         console.error('Unable to sync the database:', error);
     });
 
-module.exports = app;
+module.exports = app; // Export the app for testing or other purposes

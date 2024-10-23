@@ -6,15 +6,14 @@ const PurchaseHistory = require("../models/PurchaseHistory");
 const generateReport = async (req, res) => {
   try {
     const results = await sequelize.query(`
-USE test;  -- Replace with your database name
 
 WITH PurchaseSummary AS (
     SELECT 
         p.product_name AS ProductName,
         u.name AS CustomerName,
         SUM(ph.purchase_quantity) AS Quantity,
-        MAX(p.product_price) AS Price,  -- Assuming price is consistent for each product
-        SUM(ph.purchase_quantity * p.product_price) AS Total
+        MAX(p.product_price) AS Price,  -- Price per product
+        SUM(ph.purchase_quantity * p.product_price) AS Total  -- Total spent per product
     FROM 
         PurchaseHistory ph
     JOIN 
@@ -40,10 +39,11 @@ SELECT
     'Gross Total:' AS ProductName,
     NULL AS CustomerName,
     SUM(Quantity) AS Quantity,
-    SUM(Price) AS Price,  -- Sum of all prices
+    SUM(Total / NULLIF(Quantity, 0)) AS Price,  -- This is the sum of maximum prices
     SUM(Total) AS Total
 FROM 
     PurchaseSummary;
+
 
         `);
 
