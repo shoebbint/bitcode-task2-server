@@ -1,6 +1,6 @@
-// models/Product.js
+
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/db'); // Adjust the path accordingly
+const { sequelize } = require('../config/db'); 
 
 const Product = sequelize.define('Product', {
     id: {
@@ -22,7 +22,7 @@ const Product = sequelize.define('Product', {
         allowNull: false,
     },
 }, {
-    timestamps: false, // Adjust if you have created_at/updated_at columns
+    timestamps: false, 
 });
 
 module.exports = Product;

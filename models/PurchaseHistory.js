@@ -9,21 +9,21 @@ const PurchaseHistory = sequelize.define('PurchaseHistory', {
   },
   order_no: {
     type: DataTypes.INTEGER,
-    allowNull: false, // Changed to not allow nulls
+    allowNull: false, 
   },
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: true, // Allowing null as per your schema
+    allowNull: true, 
     references: {
-      model: 'Users', // Name of the Users table
+      model: 'Users', 
       key: 'id',
     },
   },
   product_id: {
     type: DataTypes.INTEGER,
-    allowNull: true, // Allowing null as per your schema
+    allowNull: true, 
     references: {
-      model: 'Products', // Name of the Products table
+      model: 'Products', 
       key: 'id',
     },
   },
@@ -33,12 +33,12 @@ const PurchaseHistory = sequelize.define('PurchaseHistory', {
   },
   created_at: {
     type: DataTypes.DATE,
-    allowNull: true, // Allowing null as per your schema
-    defaultValue: DataTypes.NOW, // Set the default value to the current timestamp
+    allowNull: true, 
+    defaultValue: DataTypes.NOW, 
   },
 }, {
   tableName: 'PurchaseHistory',
-  timestamps: false, // Setting to false since you're managing timestamps manually
+  timestamps: false, 
 });
 
 module.exports = PurchaseHistory;

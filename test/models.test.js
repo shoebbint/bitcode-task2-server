@@ -5,7 +5,7 @@ const { sequelize } = require('../config/db');
 
 describe('Model Tests', () => {
     beforeAll(async () => {
-        await sequelize.sync({ force: true }); // Resets the database for testing
+        await sequelize.sync({ force: true }); 
     });
     
 

@@ -6,10 +6,10 @@ const Product = require('../models/Product');
 const PurchaseHistory = require('../models/PurchaseHistory');
 
 beforeAll(async () => {
-    // Sync database and create tables
+
     await sequelize.sync({ force: true });
 
-    // Seed some test data
+
     await User.bulkCreate([
         { id: 1, name: 'John Doe', email: 'john@example.com' },
         { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
@@ -28,7 +28,7 @@ beforeAll(async () => {
 
 
 afterAll(async () => {
-    // Close the database connection
+
     await sequelize.close();
 });
 
@@ -36,6 +36,6 @@ describe('API Tests', () => {
     it('should respond to a GET request', async () => {
         const res = await request(app).get('/api/reports');
         expect(res.statusCode).toBe(200);
-        // Add further assertions based on the expected response structure
+
     });
 });

@@ -25,7 +25,7 @@ const generateReport = async (req, res) => {
         `);
 
         res.json({
-            report: results[0], // Send the report data as a response
+            report: results[0], 
         });
     } catch (error) {
         console.error('Error generating report:', error);

@@ -1,14 +1,13 @@
 // dbConnection.js
 const { Sequelize } = require('sequelize');
+require('dotenv').config(); // Load environment variables from .env file
 
-// Create a Sequelize instance
-const sequelize = new Sequelize('bitcode_db', 'root', '12345', {
-  host: 'localhost',
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: 'mysql',
-  port: 3306, // Ensure this is the correct port
+  port: process.env.DB_PORT,
 });
 
-// Test the connection
 async function testConnection() {
   try {
     await sequelize.authenticate();
@@ -18,8 +17,6 @@ async function testConnection() {
   }
 }
 
-// Call the test function
 testConnection();
 
-// Export the Sequelize instance
 module.exports = { sequelize };
