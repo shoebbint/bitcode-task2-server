@@ -7,6 +7,7 @@ const sequelize = new Sequelize(process.env.TIDB_NAME, process.env.TIDB_USER, pr
   host: process.env.TIDB_HOST,
   dialect: 'mysql',
   port: process.env.TIDB_PORT,
+  dialectModule: require('mysql2'),
   dialectOptions: {
     ssl: {
       require: true, // This option is required for secure connections
