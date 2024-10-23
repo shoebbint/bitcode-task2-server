@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
+const cors = require('cors'); 
 const PORT = process.env.PORT || 5000;
 const reportRoutes = require('./reports');
 const dataRoutes = require('./fetchData'); 
 const { sequelize } = require('../config/db');
-
+app.use(cors());
 app.use(express.json());
 app.use('/api/reports', reportRoutes);
 app.use('/api', dataRoutes); 
